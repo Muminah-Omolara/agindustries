@@ -1,0 +1,48 @@
+/* Ensure swiper container allows positioning */
+.swiper {
+  position: relative;
+  padding-bottom: 60px; /* Adds space for pagination dots */
+}
+
+/* Navigation buttons styling */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #16a34a !important;
+top: 85% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20; /* Keep above everything */
+}
+
+.swiper-button-prev {
+
+  left: 5px !important; /* Inside container */
+}
+
+.swiper-button-next {
+  right: 5px !important; /* Inside container */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Pagination styling */
+.swiper-pagination {
+  bottom: 15px !important; /* Moves dots below content */
+  text-align: center;
+}
+
+.swiper-pagination-bullet {
+  background: #d1d5db !important;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #16a34a !important;
+  width: 12px;
+  height: 12px;
+}
