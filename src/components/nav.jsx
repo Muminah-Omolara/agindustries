@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
+import { Link } from "react-scroll";
 import Logo from "../assets/ag-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    { name: "Home", to: "home" },
+    { name: "About", to: "about" },
+    { name: "Products", to: "products" },
+    { name: "Contact", to: "contact" },
+  ];
+
+  const handleCloseMenu = () => setIsOpen(false);
 
   return (
     <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
@@ -15,18 +25,20 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 text-gray-700 font-medium">
-            <a href="#" className="hover:text-green-600 transition">
-              Home
-            </a>
-            <a href="#" className="hover:text-green-600 transition">
-              About
-            </a>
-            <a href="#" className="hover:text-green-600 transition">
-              Services
-            </a>
-            <a href="#" className="hover:text-green-600 transition">
-              Contact
-            </a>
+            {navLinks.map((link, index) => (
+              <Link
+                key={index}
+                to={link.to}
+                smooth={true}
+                duration={500}
+                offset={-70} // Adjust for fixed navbar
+                activeClass="text-green-600 font-semibold"
+                spy={true}
+                className="cursor-pointer hover:text-green-600 transition"
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
@@ -45,18 +57,19 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg transition-all duration-300 ease-in-out">
           <div className="flex flex-col space-y-4 py-4 px-6 text-gray-700 font-medium">
-            <a href="#" className="hover:text-blue-600">
-              Home
-            </a>
-            <a href="#" className="hover:text-blue-600">
-              About
-            </a>
-            <a href="#" className="hover:text-blue-600">
-              Services
-            </a>
-            <a href="#" className="hover:text-blue-600">
-              Contact
-            </a>
+            {navLinks.map((link, index) => (
+              <Link
+                key={index}
+                to={link.to}
+                smooth={true}
+                duration={500}
+                offset={-70}
+                onClick={handleCloseMenu}
+                className="cursor-pointer hover:text-green-600 transition"
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
         </div>
       )}
@@ -65,19 +78,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-
-// {/* Image */}
-//         <motion.div
-//           className="mt-10 md:mt-0 md:w-1/2 flex justify-center"
-//           initial={{ opacity: 0, scale: 0.8 }}
-//           animate={{ opacity: 1, scale: 1 }}
-//           transition={{ duration: 1, delay: 0.8 }}
-//         >
-//           <img
-//             src={Hero1}
-//             alt="AG Industries"
-//             className="w-full max-w-md md:max-w-lg rounded-lg shadow-lg"
-//           />
-//         </motion.div>

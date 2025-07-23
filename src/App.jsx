@@ -13,10 +13,19 @@ function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <AboutUs />
-      <Products />
-      <Contact />
+      <section id="home">
+        <Hero />
+      </section>
+      <section id="about">
+        <AboutUs />
+      </section>
+      <section id="products">
+        <Products />
+      </section>
+      <section id="contact">
+        <Contact />
+      </section>
+
       <OpenHoursMarquee />
       <Footer />
       <BackToTopButton />
