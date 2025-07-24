@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import Bg from "../assets/sectionimg2.jpg";
 import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -75,12 +76,12 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.5 }}
           >
-            <a
-              href="/shop"
+            <Link
+              to="/shop"
               className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center gap-2 font-medium shadow-md"
             >
               Shop Now <FaArrowRight className="text-lg" />
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
