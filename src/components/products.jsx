@@ -6,6 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom"; // ✅ Import Link
 
 import Product1 from "../assets/product1.jpg";
 import Product2 from "../assets/product2.jpg";
@@ -15,21 +16,25 @@ import Product5 from "../assets/product5.avif";
 const Products = () => {
   const products = [
     {
+      id: 1, // ✅ Add ID
       img: Product1,
       name: "RoyalGad Lysol Disinfectant",
       desc: "Powerful disinfectant approved for Avian flu. Perfect for hospitals, homes, and veterinary use.",
     },
     {
+      id: 2,
       img: Product2,
       name: "RoyalGad Germicide",
       desc: "A heavy-duty disinfectant formulated for both industrial and domestic use.",
     },
     {
+      id: 3,
       img: Product4,
       name: "RoyalGad Antiseptic Disinfectant",
       desc: "Designed for first aid and other medical uses to ensure safety and hygiene.",
     },
     {
+      id: 4,
       img: Product5,
       name: "RoyalGad Pine Disinfectant",
       desc: "Perfect for general domestic use, leaving spaces clean and fresh.",
@@ -41,9 +46,9 @@ const Products = () => {
       <motion.div
         className="max-w-7xl mx-auto px-6 lg:px-10 text-center"
         initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }} // Fade in from below
-        viewport={{ once: true, amount: 0.2 }} // Trigger when 20% visible
-        transition={{ duration: 1.8, ease: "easeOut" }} // Smooth and slow
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
       >
         {/* Heading */}
         <h2 className="text-4xl font-bold text-gray-800 mb-4">
@@ -57,7 +62,7 @@ const Products = () => {
 
         {/* Swiper Carousel */}
         <Swiper
-          className="pb-16 px-12 relative"
+          className="pb-16 px-12 relative cursor-pointer"
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={30}
           slidesPerView={1}
@@ -72,28 +77,31 @@ const Products = () => {
           }}
         >
           {products.map((product, index) => (
-            <SwiperSlide key={index}>
-              <motion.div
-                className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-500"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-              >
-                <img
-                  src={product.img}
-                  alt={product.name}
-                  className="w-full h-56 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-green-700 mb-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm pb-12 leading-relaxed">
-                    {product.desc}
-                  </p>
-                </div>
-              </motion.div>
+            <SwiperSlide key={product.id}>
+              {/* ✅ Wrap with Link to ProductDetails */}
+              <Link to={`/shop/${product.id}`}>
+                <motion.div
+                  className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-500"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: index * 0.2 }}
+                >
+                  <img
+                    src={product.img}
+                    alt={product.name}
+                    className="w-full h-56 object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-green-700 mb-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-600 text-sm pb-12 leading-relaxed">
+                      {product.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

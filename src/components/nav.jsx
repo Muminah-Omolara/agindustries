@@ -1,20 +1,34 @@
 import React, { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import Logo from "../assets/ag-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const navLinks = [
     { name: "Home", to: "home" },
     { name: "About", to: "about" },
     { name: "Products", to: "products" },
     { name: "Contact", to: "contact" },
+    { name: "Shop", to: "/shop", type: "route" }, // route for Shop
   ];
 
   const handleCloseMenu = () => setIsOpen(false);
+
+  // Show only logo on shop and product details page
+  if (location.pathname === "/shop" || location.pathname === "/productdetails") {
+    return (
+      <nav className="fixed w-full top-0 left-0 z-50 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-left justify-left h-16">
+          <img src={Logo} alt="AG Industries Logo" className="h-14 w-auto" />
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
@@ -25,20 +39,30 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 text-gray-700 font-medium">
-            {navLinks.map((link, index) => (
-              <Link
-                key={index}
-                to={link.to}
-                smooth={true}
-                duration={500}
-                offset={-70} // Adjust for fixed navbar
-                activeClass="text-green-600 font-semibold"
-                spy={true}
-                className="cursor-pointer hover:text-green-600 transition"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link, index) =>
+              link.type === "route" ? (
+                <RouterLink
+                  key={index}
+                  to={link.to}
+                  className="cursor-pointer hover:text-green-600 transition"
+                >
+                  {link.name}
+                </RouterLink>
+              ) : (
+                <ScrollLink
+                  key={index}
+                  to={link.to}
+                  smooth={true}
+                  duration={500}
+                  offset={-70}
+                  spy={true}
+                  activeClass="text-green-600 font-semibold"
+                  className="cursor-pointer hover:text-green-600 transition"
+                >
+                  {link.name}
+                </ScrollLink>
+              )
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -57,19 +81,31 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg transition-all duration-300 ease-in-out">
           <div className="flex flex-col space-y-4 py-4 px-6 text-gray-700 font-medium">
-            {navLinks.map((link, index) => (
-              <Link
-                key={index}
-                to={link.to}
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={handleCloseMenu}
-                className="cursor-pointer hover:text-green-600 transition"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link, index) =>
+              link.type === "route" ? (
+                <RouterLink
+                  key={index}
+                  to={link.to}
+                  onClick={handleCloseMenu}
+                  className="cursor-pointer hover:text-green-600 transition"
+                >
+                  {link.name}
+                </RouterLink>
+              ) : (
+                <ScrollLink
+                  key={index}
+                  to={link.to}
+                  smooth={true}
+                  duration={500}
+                  offset={-70}
+                  spy={true}
+                  onClick={handleCloseMenu}
+                  className="cursor-pointer hover:text-green-600 transition"
+                >
+                  {link.name}
+                </ScrollLink>
+              )
+            )}
           </div>
         </div>
       )}

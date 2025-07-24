@@ -76,7 +76,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 1.5 }}
           >
             <a
-              href="#"
+              href="/shop"
               className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center gap-2 font-medium shadow-md"
             >
               Shop Now <FaArrowRight className="text-lg" />

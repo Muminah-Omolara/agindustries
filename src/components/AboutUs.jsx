@@ -15,7 +15,7 @@ const AboutUs = () => {
             className="text-4xl font-bold text-gray-800 mb-4 flex items-center gap-2"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            onViewportEnter={() => setStartTyping(true)} // Trigger typing
+            onViewportEnter={() => setStartTyping(true)}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 2, ease: "easeOut" }}
           >
@@ -25,7 +25,7 @@ const AboutUs = () => {
                 <Typewriter
                   words={["AG Industries"]}
                   typeSpeed={100} // typing speed
-                  deleteSpeed={0} // no deletion
+                  deleteSpeed={0}
                   cursor
                   cursorStyle="|"
                   loop={1} // type once
